@@ -1,6 +1,7 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const axios = require('axios');
+const cors = require('cors');
 
 dotenv.config({quiet: true});
 
@@ -8,6 +9,7 @@ const PORT = process.env.PORT || 4001;
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 /**
  * Structure of posts:
