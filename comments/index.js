@@ -15,8 +15,9 @@ app.use(express.json());
  */
 const comments = {}
 
-app.post('/comment-create', async (req, res) => {
-    const { postTitle, comment } = req.body;
+app.post('/posts/:postTitle/comments', async (req, res) => {
+    const { postTitle } = req.params;
+    const { comment } = req.body;
 
     if (!postTitle || !comment) {
        return res.status(400).json({ message: 'Post title and comment are required' });
@@ -28,7 +29,7 @@ app.post('/comment-create', async (req, res) => {
     }
     comments[postTitle].comments.push(commentObj);
 
-    await axios.post('http://localhost:4005/events', { type: 'CommentCreated', data: { postTitle, comment: commentObj }})
+    await axios.post('http://localhost:4005/', { type: 'CommentCreated', data: { postTitle, comment: commentObj }})
         .catch(err => {console.error('Error sending event to event bus:', err.message);});
 
     return res.status(201).json({message: 'Comment created successfully', comment: commentObj});

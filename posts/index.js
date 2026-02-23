@@ -25,7 +25,7 @@ app.post('/posts-create', async (req, res) => {
     const post = {content, title, date: new Date(), comments: []};
     posts[title] = post;
 
-    await axios.post('http://localhost:4005/events', { type: 'PostCreated', data: post})
+    await axios.post('http://localhost:4005/', { type: 'PostCreated', data: post})
         .catch(err => {console.error('Error sending event to event bus:', err.message);});
 
     return res.status(201).json({message: 'Post created successfully', post: posts[title]});
