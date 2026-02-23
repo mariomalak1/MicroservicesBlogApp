@@ -1,0 +1,21 @@
+info:
+  name: create comment
+  type: http
+  seq: 1
+
+http:
+  method: POST
+  url: "{{comments-service}}/posts/mario/comments"
+  body:
+    type: json
+    data: |-
+      {
+        "comment": "mario frmo mario"
+      }
+  auth: inherit
+
+settings:
+  encodeUrl: true
+  timeout: 0
+  followRedirects: true
+  maxRedirects: 5

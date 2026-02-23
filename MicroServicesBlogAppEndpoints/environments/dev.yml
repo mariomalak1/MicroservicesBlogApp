@@ -1,0 +1,10 @@
+name: dev
+variables:
+  - name: posts-service
+    value: 127.0.0.1:4001
+  - name: events-service
+    value: 127.0.0.1:4005
+  - name: query-service
+    value: 127.0.0.1:4003
+  - name: comments-service
+    value: 127.0.0.1:4002
