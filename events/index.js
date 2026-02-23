@@ -1,5 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
+const { default: axios } = require('axios');
 dotenv.config({quiet: true});
 
 const PORT = process.env.PORT || 4005;
@@ -14,6 +15,13 @@ app.post('/', async (req, res) => {
 
     const event = {type, data};
     events[type] = event;
+
+    await Promise.all([
+        axios.post('http://localhost:4001/events', event),
+        axios.post('http://localhost:4002/events', event),
+        axios.post('http://localhost:4003/events', event),
+        // axios.post('http://localhost:4004/events', event)
+    ])
 
     return res.status(201).json({message: 'Event created successfully', event: events[type]});
 })
